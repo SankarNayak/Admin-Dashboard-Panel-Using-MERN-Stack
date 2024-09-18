@@ -25,7 +25,6 @@ const home = async (req, res) => {
 const register = async (req, res) => {
   try {
     const { username, email, phone, password } = req.body;
-    console.log(req.body);
 
     if (!username || !email || !phone || !password) {
       return res

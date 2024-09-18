@@ -60,24 +60,24 @@ const Contact = () => {
   };
   return (
     <>
-      <section className='section-contact'>
-        <div className='contact-content container'>
-          <h1 className='main-heading'>Contact us</h1>
+      <section className="section-contact">
+        <div className="contact-content container">
+          <h1 className="main-heading">Contact us</h1>
         </div>
-        <div className='container grid grid-two-cols'>
-          <div className='contact-img'>
-            <img src='/images/support.png' alt='we are always ready to help' />
+        <div className="container grid grid-two-cols">
+          <div className="contact-img">
+            <img src="/images/support.png" alt="we are always ready to help" />
           </div>
 
-          <section className='section-form'>
+          <section className="section-form">
             <form onSubmit={handleSubmit}>
               <div>
-                <label htmlFor='username'>username</label>
+                <label htmlFor="username">username</label>
                 <input
-                  type='text'
-                  name='username'
-                  id='username'
-                  autoComplete='off'
+                  type="text"
+                  name="username"
+                  id="username"
+                  autoComplete="off"
                   value={formData.username}
                   onChange={handleInput}
                   required
@@ -85,12 +85,12 @@ const Contact = () => {
               </div>
 
               <div>
-                <label htmlFor='email'>email</label>
+                <label htmlFor="email">email</label>
                 <input
-                  type='email'
-                  name='email'
-                  id='email'
-                  autoComplete='off'
+                  type="email"
+                  name="email"
+                  id="email"
+                  autoComplete="off"
                   value={formData.email}
                   onChange={handleInput}
                   required
@@ -98,33 +98,33 @@ const Contact = () => {
               </div>
 
               <div>
-                <label htmlFor='message'>message</label>
+                <label htmlFor="message">message</label>
                 <textarea
-                  name='message'
-                  id='message'
-                  autoComplete='off'
+                  name="message"
+                  id="message"
+                  autoComplete="off"
                   value={formData.message}
                   onChange={handleInput}
                   required
-                  cols='30'
-                  rows='6'
+                  cols="30"
+                  rows="6"
                 ></textarea>
               </div>
 
               <div>
-                <button type='submit'>submit</button>
+                <button type="submit">submit</button>
               </div>
             </form>
           </section>
         </div>
-        <section className='mb-3'>
+        <section className="mb-3">
           <iframe
-            src=''
-            width='100%'
-            height='450'
+            src=""
+            width="100%"
+            height="450"
             allowFullScreen
-            loading='lazy'
-            referrerPolicy='no-referrer-when-downgrade'
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </section>
       </section>

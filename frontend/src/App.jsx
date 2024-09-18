@@ -14,6 +14,8 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminContacts from "./pages/AdminContacts";
 import AdminUpdate from "./pages/AdminUpdate";
 import AdminReply from "./pages/AdminReply";
+import AdminServices from "./pages/AdminServices";
+import AdminUpdateServices from "./pages/AdminUpdateServices";
 import Footer from "./components/Footer/Footer";
 
 const App = () => {
@@ -32,9 +34,11 @@ const App = () => {
           <Route path="*" element={<Error />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="users" element={<AdminUsers />} />
-            <Route path="contacts" element={<AdminContacts />} />
             <Route path="users/:id/edit" element={<AdminUpdate />} />
+            <Route path="contacts" element={<AdminContacts />} />
             <Route path="contacts/:id/reply" element={<AdminReply />} />
+            <Route path="services" element={<AdminServices />} />
+            <Route path="services/:id/edit" element={<AdminUpdateServices />} />
           </Route>
         </Routes>
         <Footer />

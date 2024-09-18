@@ -4,11 +4,12 @@ import { useAuth } from "../store/authContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const AdminUpdate = () => {
-  const [data, setData] = useState({
-    username: "",
-    email: "",
-    phone: "",
+const AdminUpdateServices = () => {
+  const [service, setService] = useState({
+    service: "",
+    description: "",
+    price: "",
+    provider: "",
   });
 
   const navigate = useNavigate();
@@ -18,10 +19,10 @@ const AdminUpdate = () => {
   const { authorizationToken } = useAuth();
 
   //to get the single user data
-  const getSingleUserData = async () => {
+  const getSingleSeriviceData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/users/${params.id}`,
+        `http://localhost:5000/api/admin/services/${params.id}`,
         {
           method: "GET",
           headers: {
@@ -31,22 +32,23 @@ const AdminUpdate = () => {
         }
       );
       const data = await response.json();
-      setData(data);
+      console.log(`Services single data: ${data}`);
+      setService(data);
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    getSingleUserData();
+    getSingleSeriviceData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    setData({
-      ...data,
+    setService({
+      ...service,
       [name]: value,
     });
   };
@@ -56,20 +58,20 @@ const AdminUpdate = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/users/update/${params.id}`,
+        `http://localhost:5000/api/admin/services/update/${params.id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: authorizationToken,
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(service),
         }
       );
 
       if (response.ok) {
         toast.success("Updated succesfully");
-        navigate("/admin/users");
+        navigate("/admin/services");
       } else {
         toast.error("Failed to update");
       }
@@ -81,43 +83,55 @@ const AdminUpdate = () => {
     <>
       <section className="section-contact">
         <div className="contact-content container">
-          <h1 className="main-heading">Update User Data</h1>
+          <h1 className="main-heading">Update Service Data</h1>
         </div>
         <div className="container grid grid-two-cols">
           <section className="section-form">
             <form onSubmit={handleUpdate}>
               <div>
-                <label htmlFor="username">username</label>
+                <label htmlFor="service">Service</label>
                 <input
                   type="text"
-                  name="username"
-                  id="username"
+                  name="service"
+                  id="service"
                   autoComplete="off"
-                  value={data.username}
+                  value={service.service}
                   onChange={handleInput}
                   required
                 />
               </div>
               <div>
-                <label htmlFor="email">email</label>
+                <label htmlFor="description">Description</label>
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
+                  type="text"
+                  name="description"
+                  id="description"
                   autoComplete="off"
-                  value={data.email}
+                  value={service.description}
                   onChange={handleInput}
                   required
                 />
               </div>
               <div>
-                <label htmlFor="phone">Mobile</label>
+                <label htmlFor="price">Price</label>
                 <input
-                  type="phone"
-                  name="phone"
-                  id="phone"
+                  type="text"
+                  name="price"
+                  id="price"
                   autoComplete="off"
-                  value={data.phone}
+                  value={service.price}
+                  onChange={handleInput}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="provider">Provider</label>
+                <input
+                  type="text"
+                  name="provider"
+                  id="provider"
+                  autoComplete="off"
+                  value={service.provider}
                   onChange={handleInput}
                   required
                 />
@@ -138,4 +152,4 @@ const AdminUpdate = () => {
   );
 };
 
-export default AdminUpdate;
+export default AdminUpdateServices;

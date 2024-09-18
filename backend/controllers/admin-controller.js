@@ -1,5 +1,6 @@
 const User = require("../models/user-model");
 const Contact = require("../models/contact-model");
+const Service = require("../models/service-model");
 const mailer = require("../mailer/mailer");
 const sender = process.env.YOUR_MAIL;
 
@@ -19,9 +20,9 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-//* --------------
-//* user get Logic
-//* --------------
+//* -----------------
+//* getUserById Logic
+//* -----------------
 
 const getUserById = async (req, res, next) => {
   try {
@@ -33,9 +34,9 @@ const getUserById = async (req, res, next) => {
   }
 };
 
-//* -----------------
-//* user update Logic
-//* -----------------
+//* --------------------
+//* updateUserById Logic
+//* --------------------
 
 const updateUserById = async (req, res, next) => {
   try {
@@ -54,9 +55,9 @@ const updateUserById = async (req, res, next) => {
   }
 };
 
-//* -----------------
-//* user delete Logic
-//* -----------------
+//* ---------------------
+//* deleteUsersById Logic
+//* ---------------------
 
 const deleteUsersById = async (req, res, next) => {
   try {
@@ -69,8 +70,39 @@ const deleteUsersById = async (req, res, next) => {
 };
 
 //* --------------------
-//* contact delete Logic
+//* getAllContacts Logic
 //* --------------------
+
+const getAllContacts = async (req, res, next) => {
+  try {
+    const contacts = await Contact.find();
+    if (!contacts || contacts.length === 0) {
+      return res.status(404).json({ message: "No Contacts found" });
+    }
+    res.status(200).json(contacts);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+//* ---------------------
+//* getContactsById Logic
+//* ---------------------
+
+const getContactsById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const data = await Contact.findOne({ _id: id }, { password: 0 });
+    return res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//* ------------------------
+//* deleteContactsById Logic
+//* ------------------------
 
 const deleteContactsById = async (req, res, next) => {
   try {
@@ -82,19 +114,9 @@ const deleteContactsById = async (req, res, next) => {
   }
 };
 
-//* ----------------
-//* Reply User Logic
-//* ----------------
-
-const getContactsById = async (req, res, next) => {
-  try {
-    const id = req.params.id;
-    const data = await Contact.findOne({ _id: id }, { password: 0 });
-    return res.status(200).json(data);
-  } catch (error) {
-    next(error);
-  }
-};
+//* -----------------------
+//* replyContactsById Logic
+//* -----------------------
 
 const replyContactsById = async (req, res, next) => {
   try {
@@ -133,29 +155,82 @@ const replyContactsById = async (req, res, next) => {
 };
 
 //* --------------------
-//* getAllContacts Logic
+//* getAllServices Logic
 //* --------------------
 
-const getAllContacts = async (req, res, next) => {
+const getAllServices = async (req, res, next) => {
   try {
-    const contacts = await Contact.find();
-    if (!contacts || contacts.length === 0) {
-      return res.status(404).json({ message: "No Contacts found" });
+    const services = await Service.find();
+    if (!services || services.length === 0) {
+      return res.status(404).json({ message: "No Services found" });
     }
-    res.status(200).json(contacts);
+    res.status(200).json(services);
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
 
+//* --------------------
+//* getServiceById Logic
+//* --------------------
+
+const getServiceById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const serviceData = await Service.findOne({ _id: id });
+    return res.status(200).json(serviceData);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//* -----------------------
+//* updateServiceById Logic
+//* -----------------------
+
+const updateServiceById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const updatedServiceData = req.body;
+
+    const updatedData = await Service.updateOne(
+      { _id: id },
+      {
+        $set: updatedServiceData,
+      }
+    );
+    return res.status(200).json(updatedData);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//* ---------------------
+//* deleteUsersById Logic
+//* ---------------------
+
+const deleteServiceById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await Service.deleteOne({ _id: id });
+    return res.status(200).json({ message: "User Deleted Successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllUsers,
-  getAllContacts,
-  deleteUsersById,
   getUserById,
   updateUserById,
-  deleteContactsById,
+  deleteUsersById,
+  getAllContacts,
   getContactsById,
+  deleteContactsById,
   replyContactsById,
+  getAllServices,
+  getServiceById,
+  updateServiceById,
+  deleteServiceById,
 };

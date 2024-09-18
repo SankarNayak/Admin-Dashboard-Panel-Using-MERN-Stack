@@ -32,7 +32,7 @@ const AdminLayout = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/service">
+                <NavLink to="/admin/services">
                   <FaRegListAlt />
                   Services
                 </NavLink>

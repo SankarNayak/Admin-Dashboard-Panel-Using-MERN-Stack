@@ -17,7 +17,6 @@ const authMiddleware = async (req, res, next) => {
 
   //? Assuming token is in the format "Bearer <jwtToken>, Removing 'Bearer' from token string and trim excess spaces
   const jwtToken = token.replace("Bearer", "").trim();
-  console.log(jwtToken);
 
   try {
     //? Verify the JWT token usiing the secret key

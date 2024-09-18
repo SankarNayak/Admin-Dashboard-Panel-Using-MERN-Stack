@@ -40,4 +40,20 @@ router
   .route("/contacts/:id")
   .get(authMiddleware, adminMidddleware, adminControllers.getContactsById);
 
+router
+  .route("/services")
+  .get(authMiddleware, adminMidddleware, adminControllers.getAllServices);
+
+router
+  .route("/services/:id")
+  .get(authMiddleware, adminMidddleware, adminControllers.getServiceById);
+
+router
+  .route("/services/delete/:id")
+  .delete(authMiddleware, adminMidddleware, adminControllers.deleteServiceById);
+
+router
+  .route("/services/update/:id")
+  .patch(authMiddleware, adminMidddleware, adminControllers.updateServiceById);
+
 module.exports = router;
