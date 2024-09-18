@@ -13,6 +13,7 @@ import AdminLayout from "./components/layouts/Admin-Layout";
 import AdminUsers from "./pages/AdminUsers";
 import AdminContacts from "./pages/AdminContacts";
 import AdminUpdate from "./pages/AdminUpdate";
+import AdminReply from "./pages/AdminReply";
 import Footer from "./components/Footer/Footer";
 
 const App = () => {
@@ -21,18 +22,19 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/service' element={<Service />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/logout' element={<Logout />} />
-          <Route path='*' element={<Error />} />
-          <Route path='/admin' element={<AdminLayout />}>
-            <Route path='users' element={<AdminUsers />} />
-            <Route path='contacts' element={<AdminContacts />} />
-            <Route path='users/:id/edit' element={<AdminUpdate />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/service" element={<Service />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="*" element={<Error />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="contacts" element={<AdminContacts />} />
+            <Route path="users/:id/edit" element={<AdminUpdate />} />
+            <Route path="contacts/:id/reply" element={<AdminReply />} />
           </Route>
         </Routes>
         <Footer />
