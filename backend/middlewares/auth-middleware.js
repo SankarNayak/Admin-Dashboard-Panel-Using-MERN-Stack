@@ -28,8 +28,6 @@ const authMiddleware = async (req, res, next) => {
       password: 0,
     });
 
-    console.log(userData);
-
     //? Attach token, user data, and user ID to the request object
     req.token = token;
     req.user = userData;

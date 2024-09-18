@@ -11,34 +11,34 @@ const AdminLayout = () => {
   }
 
   if (!user.isAdmin) {
-    return <Navigate to='/' />;
+    return <Navigate to="/" />;
   }
   return (
     <>
       <header>
-        <div className='container'>
+        <div className="container">
           <nav>
             <ul>
               <li>
-                <NavLink to='/admin/users'>
+                <NavLink to="/admin/users">
                   <FaUser />
-                  users
+                  Users
                 </NavLink>
               </li>
               <li>
-                <NavLink to='/admin/contacts'>
+                <NavLink to="/admin/contacts">
                   <FaMessage />
-                  contacts
+                  Contacts
                 </NavLink>
               </li>
               <li>
-                <NavLink to='/service'>
+                <NavLink to="/service">
                   <FaRegListAlt />
-                  services
+                  Services
                 </NavLink>
               </li>
               <li>
-                <NavLink to='/'>
+                <NavLink to="/">
                   <FaHome />
                   Home
                 </NavLink>

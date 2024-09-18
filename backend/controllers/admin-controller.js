@@ -1,5 +1,7 @@
 const User = require("../models/user-model");
 const Contact = require("../models/contact-model");
+const mailer = require("../mailer/mailer");
+const sender = process.env.YOUR_MAIL;
 
 //* -----------------
 //* getAllUsers Logic
@@ -80,6 +82,56 @@ const deleteContactsById = async (req, res, next) => {
   }
 };
 
+//* ----------------
+//* Reply User Logic
+//* ----------------
+
+const getContactsById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const data = await Contact.findOne({ _id: id }, { password: 0 });
+    return res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const replyContactsById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const { email, reply } = req.body;
+
+    const userExist = await Contact.findOne({ _id: id }, { password: 0 });
+    if (!userExist) {
+      return res
+        .status(400)
+        .json({ message: "No account with that email address exists." });
+    }
+
+    const mailOptions = {
+      from: sender,
+      to: email,
+      subject: "Reply For Your Query",
+      text: reply,
+    };
+
+    mailer.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        res.status(500).json({ message: "Error sending email" });
+      } else {
+        res.status(200).json({
+          message:
+            "An email has been sent to " +
+            email +
+            " with further instructions.",
+        });
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 //* --------------------
 //* getAllContacts Logic
 //* --------------------
@@ -87,7 +139,6 @@ const deleteContactsById = async (req, res, next) => {
 const getAllContacts = async (req, res, next) => {
   try {
     const contacts = await Contact.find();
-    console.log(contacts);
     if (!contacts || contacts.length === 0) {
       return res.status(404).json({ message: "No Contacts found" });
     }
@@ -105,4 +156,6 @@ module.exports = {
   getUserById,
   updateUserById,
   deleteContactsById,
+  getContactsById,
+  replyContactsById,
 };

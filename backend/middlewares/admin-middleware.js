@@ -1,6 +1,5 @@
 const adminMidddleware = async (req, res, next) => {
   try {
-    console.log(req.user);
     const adminRole = req.user.isAdmin;
 
     if (!adminRole) {

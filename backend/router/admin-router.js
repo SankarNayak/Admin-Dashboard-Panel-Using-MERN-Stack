@@ -29,7 +29,15 @@ router
   );
 
 router
+  .route("/contacts/reply/:id")
+  .post(authMiddleware, adminMidddleware, adminControllers.replyContactsById);
+
+router
   .route("/contacts")
   .get(authMiddleware, adminMidddleware, adminControllers.getAllContacts);
+
+router
+  .route("/contacts/:id")
+  .get(authMiddleware, adminMidddleware, adminControllers.getContactsById);
 
 module.exports = router;
