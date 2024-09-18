@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/authContext";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AdminContacts = () => {
@@ -16,7 +17,6 @@ const AdminContacts = () => {
       });
 
       const data = await response.json();
-      console.log("Contacts data:", data);
 
       if (response.ok) {
         setContactData(data);
@@ -64,8 +64,8 @@ const AdminContacts = () => {
                 <th>User</th>
                 <th>Email</th>
                 <th>Message</th>
-                <th>Delete</th>
                 <th>Reply</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -78,15 +78,12 @@ const AdminContacts = () => {
                     <td>{email}</td>
                     <td>{message}</td>
                     <td>
-                      <button
-                        className="btn"
-                        onClick={() => deleteContactById(_id)}
-                      >
-                        Delete
-                      </button>
+                      <Link to={`/admin/contacts/${_id}/reply`}>Reply</Link>
                     </td>
                     <td>
-                      <button className="btn">Reply</button>
+                      <button onClick={() => deleteContactById(_id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );
