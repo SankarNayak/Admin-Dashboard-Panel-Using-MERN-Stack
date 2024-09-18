@@ -8,48 +8,48 @@ const Navbar = () => {
   return (
     <>
       <header>
-        <div className='container'>
-          <div className='logo-brand'>
-            <NavLink style={{ fontSize: "2.6rem" }} to='/'>
+        <div className="container">
+          <div className="logo-brand">
+            <NavLink style={{ fontSize: "3.2rem" }} to="/">
               Sankar
             </NavLink>
           </div>
           <nav>
-            <ul>
+            <ul className="navbar">
               <li>
-                <NavLink to='/'>Home</NavLink>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <NavLink to='/about'>About</NavLink>
+                <NavLink to="/about">About</NavLink>
               </li>
               <li>
-                <NavLink to='/contact'>Contact</NavLink>
+                <NavLink to="/contact">Contact</NavLink>
               </li>
               <li>
-                <NavLink to='/service'>Service</NavLink>
+                <NavLink to="/service">Service</NavLink>
               </li>
               {isLoggedIn ? (
                 user.isAdmin ? (
                   <>
                     <li>
-                      <NavLink to='/logout'>Logout</NavLink>
+                      <NavLink to="/logout">Logout</NavLink>
                     </li>
                     <li>
-                      <NavLink to='/admin'>Admin</NavLink>
+                      <NavLink to="/admin">Admin</NavLink>
                     </li>
                   </>
                 ) : (
                   <li>
-                    <NavLink to='/logout'>Logout</NavLink>
+                    <NavLink to="/logout">Logout</NavLink>
                   </li>
                 )
               ) : (
                 <>
                   <li>
-                    <NavLink to='/register'>Register</NavLink>
+                    <NavLink to="/register">Register</NavLink>
                   </li>
                   <li>
-                    <NavLink to='/login'>Login</NavLink>
+                    <NavLink to="/login">Login</NavLink>
                   </li>
                 </>
               )}
