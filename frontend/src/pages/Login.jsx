@@ -97,9 +97,30 @@ const Login = () => {
                     />
                   </div>
                   <br />
+                  <a style={{}} onClick={() => navigate("/forgot-password")}>
+                    Forgot your password?
+                  </a>
                   <button type="submit" className="btn btn-submit">
                     Login Now
                   </button>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginTop: "1.6rem",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <p style={{ color: "white" }}>
+                      Don&apos;t have an account?
+                    </p>
+                    <a
+                      style={{ paddingLeft: "1rem" }}
+                      onClick={() => navigate("/register")}
+                    >
+                      Register
+                    </a>
+                  </div>
                 </form>
               </div>
             </div>

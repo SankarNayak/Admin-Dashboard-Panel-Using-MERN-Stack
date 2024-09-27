@@ -44,7 +44,7 @@ const Register = () => {
       if (response.ok) {
         storeToken(res_data.token);
         setUser({ username: "", email: "", phone: "", password: "" });
-        toast.success("Registration successful")
+        toast.success("Registration successful");
         navigate("/");
       } else {
         //? Here we can actually handle those erros through the error midldeware and validate schema
@@ -62,67 +62,83 @@ const Register = () => {
   return (
     <section>
       <main>
-        <div className='section-registration'>
-          <div className='container grid grid-two-cols'>
-            <div className='registration-image reg-img'>
+        <div className="section-registration">
+          <div className="container grid grid-two-cols">
+            <div className="registration-image reg-img">
               <img
-                src='./images/register.png'
-                alt='loading...'
-                width='400'
-                height='500'
+                src="./images/register.png"
+                alt="loading..."
+                width="400"
+                height="500"
               />
             </div>
-            <div className='registration-form'>
-              <h1 className='main-heading mb-3'>Registration form</h1>
+            <div className="registration-form">
+              <h1 className="main-heading mb-3">Registration form</h1>
               <br />
               <form onSubmit={handleSubmit}>
                 <div>
-                  <label htmlFor='username'>username</label>
+                  <label htmlFor="username">username</label>
                   <input
-                    type='text'
-                    name='username'
-                    placeholder='username'
-                    autoComplete='off'
+                    type="text"
+                    name="username"
+                    placeholder="username"
+                    autoComplete="off"
                     value={user.username}
                     onChange={handleInput}
                   />
                 </div>
                 <div>
-                  <label htmlFor='email'>email</label>
+                  <label htmlFor="email">email</label>
                   <input
-                    type='text'
-                    name='email'
-                    placeholder='email'
-                    autoComplete='off'
+                    type="text"
+                    name="email"
+                    placeholder="email"
+                    autoComplete="off"
                     value={user.email}
                     onChange={handleInput}
                   />
                 </div>
                 <div>
-                  <label htmlFor='phone'>phone</label>
+                  <label htmlFor="phone">phone</label>
                   <input
-                    type='number'
-                    name='phone'
-                    placeholder='phone'
-                    autoComplete='off'
+                    type="number"
+                    name="phone"
+                    placeholder="phone"
+                    autoComplete="off"
                     value={user.phone}
                     onChange={handleInput}
                   />
                 </div>
                 <div>
-                  <label htmlFor='password'>password</label>
+                  <label htmlFor="password">password</label>
                   <input
-                    type='password'
-                    name='password'
-                    placeholder='password'
-                    autoComplete='off'
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                    autoComplete="off"
                     value={user.password}
                     onChange={handleInput}
                   />
                 </div>
-                <button type='submit' className='btn btn-submit'>
+                <button type="submit" className="btn btn-submit">
                   Register Now
                 </button>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "1.6rem",
+                    justifyContent: "center",
+                  }}
+                >
+                  <p style={{ color: "white" }}>Already have an account?</p>
+                  <a
+                    style={{ paddingLeft: "1rem" }}
+                    onClick={() => navigate("/login")}
+                  >
+                    Sign In
+                  </a>
+                </div>
               </form>
             </div>
           </div>

@@ -41,7 +41,6 @@ li,
 label,
 input,
 textarea {
-  /* font-size: 1.8rem; */
   font-size: 2.1rem;
   line-height: 1.56;
   letter-spacing: 0.1rem;
@@ -204,7 +203,7 @@ footer {
 ** ------------------- */
 .section-contact {
   & .contact-content {
-    padding: 0;
+    padding-left: 2.4rem;
 
     & h1 {
       margin-bottom: 3.2rem;
@@ -215,7 +214,7 @@ footer {
   }
   & .contact-img {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     & img {
       width: 80%;
@@ -231,7 +230,7 @@ footer {
       gap: 3.2rem;
     }
     & label {
-      display: block;
+      display: flex;
       margin-bottom: 1.2rem;
       text-transform: capitalize;
     }
@@ -246,9 +245,13 @@ footer {
 
 /*? state rules  */
 
-a:hover,
 a.active {
-  color: deepskyblue;
+  color: var(--main-color);
+}
+
+a:hover {
+  color: teal;
+  cursor: pointer;
 }
 
 /* pseduo elements  */
@@ -264,20 +267,6 @@ a.active {
     width: 50%;
     height: 0.5rem;
     background-color: var(--main-color);
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover,
-  a.active {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }
 
@@ -381,17 +370,18 @@ a.active {
 
   & .registration-form {
     & label {
-      display: block;
+      display: flex;
       margin: 2.4rem 0 0.8rem 0;
       text-transform: capitalize;
     }
     & input {
-      width: 80%;
+      width: 100%;
       padding: 0.6rem 0.6rem;
     }
 
     & button {
       margin-top: 3.2rem;
+      width: 100%;
     }
   }
 }
@@ -424,7 +414,7 @@ a.active {
 
 .section-services {
   & .container:first-child {
-    padding: 0;
+    padding-left: 2.4rem;
   }
   & .grid-three-cols {
     grid-template-columns: repeat(3, 1fr);

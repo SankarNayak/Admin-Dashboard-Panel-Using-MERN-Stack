@@ -25,6 +25,10 @@ ul {
   margin-right: 30px;
 }
 
+.navbar a:hover {
+  color: #00c1db;
+}
+
 .navbar a::after {
   content: "";
   position: absolute;

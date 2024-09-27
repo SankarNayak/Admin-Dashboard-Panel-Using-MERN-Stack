@@ -54,9 +54,9 @@ userSchema.pre("save", async function (next) {
 //* compare the password
 //* --------------------
 
-userSchema.methods.comparePassword = async function(password) {
+userSchema.methods.comparePassword = async function (password) {
   return bcrypt.compare(password, this.password);
-}
+};
 
 //* --------------
 //* json web token
@@ -72,11 +72,47 @@ userSchema.methods.generateToken = async function () {
       },
       process.env.JWT_SECRET_KEY,
       {
-        expiresIn: "1d"
+        expiresIn: "1d",
       }
     );
   } catch (err) {
     console.log("Token error", err);
+  }
+};
+
+//* -----------------------------
+//* Generate reset password token
+//* -----------------------------
+
+userSchema.methods.generateResetPasswordToken = async function () {
+  const token = jwt.sign(
+    {
+      userId: this._id.toString(),
+      email: this.email,
+    },
+    process.env.JWT_SECRET_KEY,
+    {
+      expiresIn: "1h",
+    }
+  );
+
+  this.resetPasswordToken = token;
+  this.resetPasswordExpires = Date.now() + 60 * 60 * 1000;
+  await this.save();
+
+  return token;
+};
+
+//* ---------------------------
+//* Verify reset password token
+//* ---------------------------
+
+userSchema.statics.verifyResetPasswordToken = async function (token) {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    return decoded;
+  } catch (err) {
+    return null;
   }
 };
 

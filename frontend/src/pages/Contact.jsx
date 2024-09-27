@@ -117,16 +117,6 @@ const Contact = () => {
             </form>
           </section>
         </div>
-        <section className="mb-3">
-          <iframe
-            src=""
-            width="100%"
-            height="450"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </section>
       </section>
     </>
   );

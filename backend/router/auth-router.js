@@ -41,5 +41,7 @@ router
   .post(validate(signupSchema), authControllers.register);
 router.route("/login").post(validate(loginSchema), authControllers.login);
 router.route("/user").get(authMiddleware, authControllers.user);
+router.route("/forgot-password").post(authControllers.forgotPassword);
+router.route("/reset-password/:token").post(authControllers.resetPassword);
 
 module.exports = router;

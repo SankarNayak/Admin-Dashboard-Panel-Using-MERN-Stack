@@ -5,6 +5,7 @@
 // ?In an Express.js application, a "controller" refers to a part of your code that is responsible for handling the application's logic. Controllers are typically used to process incoming requests, interact with models (data sources), and send responses back to clients. They help organize your application by separating concerns and following the MVC (Model-View-Controller) design pattern.
 
 const User = require("../models/user-model");
+const mailer = require("../mailer/mailer");
 
 // *---------------
 // *Home Page Logic
@@ -96,4 +97,85 @@ const user = async (req, res) => {
   }
 };
 
-module.exports = { home, register, login, user };
+//* ---------------------
+//* Forgot Password Logic
+//* ---------------------
+
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const userExist = await User.findOne({ email });
+
+    if (!userExist) {
+      return res
+        .status(400)
+        .json({ message: "No account with that email address exists." });
+    }
+
+    const token = await userExist.generateResetPasswordToken();
+
+    const resetPasswordUrl = `http://localhost:5173/reset-password/${token}`;
+
+    const mailOptions = {
+      from: "your-gmail",
+      to: email,
+      subject: "Password Reset Request",
+      text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
+              Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n
+              ${resetPasswordUrl}\n\n
+              If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+    };
+
+    mailer.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        res.status(500).json({ message: "Error sending email" });
+      } else {
+        res.status(200).json({
+          message:
+            "An email has been sent to " +
+            email +
+            " with further instructions.",
+        });
+      }
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong. Please try again later." });
+  }
+};
+
+//* --------------------
+//* Reset Password Logic
+//* --------------------
+
+const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    const decoded = await User.verifyResetPasswordToken(token);
+
+    if (!decoded) {
+      return res
+        .status(400)
+        .json({ message: "Invalid or expired password reset token." });
+    }
+
+    const userFound = await User.findById(decoded.userId);
+
+    userFound.password = newPassword;
+    userFound.resetPasswordToken = undefined;
+    userFound.resetPasswordExpires = undefined;
+    await userFound.save();
+
+    res.status(200).json({ message: "Password reset successful." });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong. Please try again later." });
+  }
+};
+
+module.exports = { home, register, login, user, forgotPassword, resetPassword };
