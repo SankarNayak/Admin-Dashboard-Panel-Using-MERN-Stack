@@ -80,6 +80,7 @@ const Contact = () => {
                   autoComplete="off"
                   value={formData.username}
                   onChange={handleInput}
+                  placeholder="username"
                   required
                 />
               </div>
@@ -93,6 +94,7 @@ const Contact = () => {
                   autoComplete="off"
                   value={formData.email}
                   onChange={handleInput}
+                  placeholder="email"
                   required
                 />
               </div>
@@ -105,6 +107,7 @@ const Contact = () => {
                   autoComplete="off"
                   value={formData.message}
                   onChange={handleInput}
+                  placeholder="enter your message"
                   required
                   cols="30"
                   rows="6"

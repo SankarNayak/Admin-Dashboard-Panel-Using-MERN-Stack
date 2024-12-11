@@ -34,6 +34,9 @@ h1 {
   font-size: 5.4rem;
   line-height: 1.1;
   font-weight: bold;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 p,
@@ -377,6 +380,10 @@ a:hover {
     & input {
       width: 100%;
       padding: 0.6rem 0.6rem;
+      background: transparent;
+      border: none;
+      border-bottom: 0.3rem solid white;
+      outline: none;
     }
 
     & button {
