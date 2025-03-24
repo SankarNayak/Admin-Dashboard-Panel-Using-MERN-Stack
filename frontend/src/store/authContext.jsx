@@ -17,9 +17,6 @@ export const AuthProvider = ({ children }) => {
     return localStorage.setItem("token", serverToken);
   };
 
-  let isLoggedIn = !!token;
-  console.log(isLoggedIn);
-
   const logoutUser = () => {
     setToken("");
     return localStorage.removeItem("token");
@@ -75,6 +72,9 @@ export const AuthProvider = ({ children }) => {
     userAuthentication();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  let isLoggedIn = !!token;
+  console.log(isLoggedIn);
 
   return (
     <AuthContext.Provider
